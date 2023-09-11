@@ -113,37 +113,37 @@ class TicTacToe:
         #return false if no row, column, or diagonal matches
         return False
 
-def play(game, x_player, o_player, print_game=True):
-    if print_game:
-        game.print_board_nums()
-    letter='X' #starting letter
-    #iterate while empty squares
-    #return the winner to break the loop
-    while game.empty_squares():
-        if letter =='O':
-            square=o_player.get_move(game)
-        else:
-            square=x_player.get_move(game)
-        #make a move
-        if game.move(square, letter):
-            if print_game:
-                print(letter + f'moves to square {square}')
-                game.print_board()
-                print('') #empty line
-            if game.current_winner:
-                if print_game:
-                    print(letter + ' wins!')
-                return letter
-
-            #change to the other letter
-            if letter == 'X':
-                letter='O'
+    def play(game, x_player, o_player, print_game=True):
+        if print_game:
+            game.print_board_nums()
+        letter='X' #starting letter
+        #iterate while empty squares
+        #return the winner to break the loop
+        while game.empty_squares():
+            if letter =='O':
+                square=o_player.get_move(game)
             else:
-                letter= 'X'
-            if print_game:
-                print('It\'s a tie!!')
+                square=x_player.get_move(game)
+            #make a move
+            if game.move(square, letter):
+                if print_game:
+                    print(letter + f'moves to square {square}')
+                    game.print_board()
+                    print('') #empty line
+                if game.current_winner:
+                    if print_game:
+                        print(letter + ' wins!')
+                    return letter
+
+                #change to the other letter
+                if letter == 'X':
+                    letter='O'
+                else:
+                    letter= 'X'
+                if print_game:
+                    print('It\'s a tie!!')
 if __name__ == '__main__':
     x_player=Player('X')
     o_player=Computer('O')
     t=TicTacToe()
-    play=(t, x_player, o_player, print_game=True)
+    play=(t, x_player, o_player, Player()) #print_game=True
