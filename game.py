@@ -11,7 +11,6 @@
 #6. Ask if they want to replay the game
 #Kylie's video, 35:55
 
-import math
 import random
 
 #a class for the player
@@ -24,27 +23,23 @@ class Player:
         pass
 
 #a class for the computer
-class Computer:
-    def __init__(self,choice):
-        #use the previous class to implement
-        super().__init__(choice)
-    def next_move(self,game):
+#use the previous information for this
+class Computer(Player):
+    def next_move(self, game):
         square = random.choice(game.available_moves())
         return square
 class HPlayer(Player):
-    def __init__(self,choice):
-        super().__init__(choice)
     def next_move(self, game):
         valid_square = False
         val= None
         while not valid_square:
-            square = input(self.letter + '\'s Turn, Input move 0-9:')
+            square = input(self.choice + '\'s Turn, Input move 0-9:')
             #is this a correct way?
             #is is an integer? if not, invalid
             #spot not available, invalid
             try:
                 val=int(square)
-                if val not in game.avaliable_moves():
+                if val not in game.available_moves():
                     raise ValueError
                 valid_square=True #successful
             except ValueError:
@@ -121,9 +116,9 @@ class TicTacToe:
         #return the winner to break the loop
         while game.empty_squares():
             if letter =='O':
-                square=o_player.get_move(game)
+                square = o_player.get_move(game)
             else:
-                square=x_player.get_move(game)
+                square = x_player.get_move(game)
             #make a move
             if game.move(square, letter):
                 if print_game:
@@ -140,10 +135,11 @@ class TicTacToe:
                     letter='O'
                 else:
                     letter= 'X'
-                if print_game:
-                    print('It\'s a tie!!')
+            if print_game:
+                print('It\'s a tie!!')
 if __name__ == '__main__':
-    x_player=Player('X')
+    print("Hello! Welcome to TicTacToe!")
+    x_player=HPlayer('X')
     o_player=Computer('O')
     t=TicTacToe()
-    play=(t, x_player, o_player, Player()) #print_game=True
+    play=(t, x_player, o_player)
