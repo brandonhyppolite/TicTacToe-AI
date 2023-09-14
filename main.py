@@ -42,6 +42,7 @@ class Computer():
         square = self.MinMax(game, self.letter)['position'] # Call MinMax to find the best move
         return square
     #make a minMax function here
+    #def MinMax....
 
 class TicTacToe:
     def __init__(self):
@@ -138,9 +139,6 @@ def play(game, x_player, o_player, print_game=True):
             
             # after we made our move, we need to alternate letters
             letter = 'O' if letter == 'X' else 'X' # switches player
-        
-        # take a break
-        time.sleep(0.8)
 
     if print_game:
             print("It's a tie!")
