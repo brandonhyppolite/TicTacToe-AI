@@ -20,6 +20,7 @@ class Person():
         val = None
         while not valid_square:
             square = input(self.letter + '\'s turn. Input move (0-8):')
+            print('')
             # we're going to check that this is a correct value by trying to cast
             # it to an integer, and if it's not, then we say its invalid
             # if that spot is not available on the board, we also say its invalid
@@ -39,10 +40,43 @@ class Computer():
 
     def get_move(self, game):
         # get a random valid spot for our next move
-        square = self.MinMax(game, self.letter)['position'] # Call MinMax to find the best move
+        square = self.MiniMax(game, self.letter)['position'] # Call MinMax to find the best move
         return square
-    #make a minMax function here
-    #def MinMax....
+    #make a miniMax function here
+    #Use the minimax algorithm to keep track of the game and the player
+    def MiniMax(self, state, player, a=-math.inf, b=math.inf):
+        maximum=self.letter
+        other='X' if player== 'O' else 'O' #What is the player? The other is the opposite letter
+        #return the position of the letter and the score
+        if state.winner==other: #If the other person won, add one to their score
+            return {'Position': None, 'Your score is ': 1*(state.empty_squares()+1) if other == maximum else -1}
+        elif not state.empty_squares():
+            return{'Position': None, 'Your score is ': 0}
+        #Now let's save the best score for the alpha and beta
+        if player== maximum:
+            best={'Position': None, 'Your score is ':-math.inf} #the maximized score
+        else:
+            best={'Position': None, 'Your score is ': math.inf} #the minimized score
+        #Find the best move using the recursive nature of minimax
+        for test in state.available_moves():
+            state.make_move(test, player) #make a move using this testing variable
+            simulate['Position']=self.MiniMax(state, player, a, b)
+            #Reset this spot to empty
+            state.board[test] = ''
+            state.winner = None
+            simulate['Position'] = test #set the position
+            #Now let's find the best score
+            if((simulate['score'] >best['score']) and (player==maximum)) or ((simulate['score']<best['score']) and (player !=maximum)):
+                best=simulate #set the best score to the simulated score
+                #use alpha-beta pruning
+                if best>=a:
+                    a=best['score']
+                elif best>b:
+                    b=best['score']
+            if a>=b:
+                break
+        return best
+
 
 class TicTacToe:
     def __init__(self):
