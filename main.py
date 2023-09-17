@@ -49,7 +49,7 @@ class Computer():
         other='X' if player== 'O' else 'O' #What is the player? The other is the opposite letter
         #return the position of the letter and the score
         if state.winner==other: #If the other person won, add one to their score
-            return {'position': None, 'score': 1*(state.empty_squares()+1) if other == maximum else -1}
+            return {'position': None, 'score': 1*(state.empty_squares()+1) if other == maximum else -1* (state.empty_squares() + 1)}
         elif not state.empty_squares():
             return{'position': None, 'score': 0}
         #Now let's save the best score for the alpha and beta
@@ -173,7 +173,7 @@ def play(game, x_player, o_player, print_game=True):
             
             # after we made our move, we need to alternate letters
             letter = 'O' if letter == 'X' else 'X' # switches player
-     print("It's a tie!")
+        print("It's a tie!")
 
 if __name__ == '__main__':
     print("Welcome to the TicTacToe game!\n We will play a game between the user and the computer. Let's get started!")
