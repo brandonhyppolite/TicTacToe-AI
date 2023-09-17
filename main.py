@@ -49,29 +49,29 @@ class Computer():
         other='X' if player== 'O' else 'O' #What is the player? The other is the opposite letter
         #return the position of the letter and the score
         if state.winner==other: #If the other person won, add one to their score
-            return {'Position': None, 'Your score is ': 1*(state.empty_squares()+1) if other == maximum else -1}
+            return {'position': None, 'score': 1*(state.empty_squares()+1) if other == maximum else -1}
         elif not state.empty_squares():
-            return{'Position': None, 'Your score is ': 0}
+            return{'position': None, 'score': 0}
         #Now let's save the best score for the alpha and beta
         if player== maximum:
-            best={'Position': None, 'Your score is ':-math.inf} #the maximized score
+            best={'position': None, 'score':-math.inf} #the maximized score
         else:
-            best={'Position': None, 'Your score is ': math.inf} #the minimized score
+            best={'position': None, 'score': math.inf} #the minimized score
         #Find the best move using the recursive nature of minimax
         for test in state.available_moves():
             state.make_move(test, player) #make a move using this testing variable
-            simulate['Position']=self.MiniMax(state, player, a, b)
+            simulate = self.MiniMax(state, player, a, b)
             #Reset this spot to empty
             state.board[test] = ''
             state.winner = None
-            simulate['Position'] = test #set the position
+            simulate['position'] = test #set the position
             #Now let's find the best score
             if((simulate['score'] >best['score']) and (player==maximum)) or ((simulate['score']<best['score']) and (player !=maximum)):
                 best=simulate #set the best score to the simulated score
                 #use alpha-beta pruning
-                if best>=a:
+                if best['score']>=a:
                     a=best['score']
-                elif best>b:
+                elif best['score']>b:
                     b=best['score']
             if a>=b:
                 break
@@ -173,9 +173,7 @@ def play(game, x_player, o_player, print_game=True):
             
             # after we made our move, we need to alternate letters
             letter = 'O' if letter == 'X' else 'X' # switches player
-
-    if print_game:
-            print("It's a tie!")
+     print("It's a tie!")
 
 if __name__ == '__main__':
     print("Welcome to the TicTacToe game!\n We will play a game between the user and the computer. Let's get started!")
