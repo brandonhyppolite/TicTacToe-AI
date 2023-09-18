@@ -16,7 +16,7 @@ class Player:
     def get_move(self, game):
         pass
     
-class HumanPlayer(Player):
+class Human(Player):
     def __init__(self, letter):
         super().__init__(letter)
 
@@ -38,7 +38,7 @@ class HumanPlayer(Player):
 
         return val
 
-class AIComputerPlayer(Player):
+class AIComputer(Player):
     def __init__(self, letter): # we want to keep track of this
         super().__init__(letter) # super() lets us access the parent class
 
@@ -193,8 +193,8 @@ def play(game, x_player, o_player, print_game=True):
             print("It's a tie!")
 
 if __name__ == '__main__':
-    x_player = HumanPlayer('X')
-    o_player = AIComputerPlayer('O')
+    x_player = Human('X')
+    o_player = AIComputer('O')
     t = TiCTacToe()
     playAgain = True
     while playAgain:
