@@ -2,6 +2,9 @@ import math
 import random
 import time
  
+#Brandon Hyppolte, Laura Waldron, and Shamiah Bass
+#Tic tac toe game between a human and an ai using the MINIMAX algorithm
+
 class Player:
     def __init__(self, letter):
         # letter is x or o
