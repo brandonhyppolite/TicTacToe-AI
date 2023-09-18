@@ -107,4 +107,10 @@ if __name__ == '__main__':
     x_player = RandomComputerPlayer('X')
     o_player = HumanPlayer('O')
     t = TiCTacToe()
-    play(t, x_player, o_player, print_game=True)
+    playAgain = True
+    while playAgain:
+        play(t, x_player, o_player, print_game=True)
+        time.sleep(1)
+        playAgain = input("Play again? (y/n): ").lower() == 'y'
+        t = TiCTacToe()
+    print("Thanks for playing!")
