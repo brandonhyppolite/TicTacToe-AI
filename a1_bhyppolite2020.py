@@ -3,6 +3,8 @@ import random
 import time
  
 #Brandon Hyppolte, Laura Waldron, and Shamiah Bass
+#September 18, 2023
+#Assignment 1
 #Tic tac toe game between a human and an ai using the MINIMAX algorithm
 
 class Player:
